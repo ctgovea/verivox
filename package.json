@@ -1,0 +1,33 @@
+{
+  "name": "verivox",
+  "version": "1.0.0",
+  "description": "Tariff Comparison",
+  "main": "index.js",
+  "engines": {
+    "node": "14.17.3"
+  },
+  "scripts": {
+    "start": "node .",
+    "start:db": "docker start my-postgres || docker run --name my-postgres -e POSTGRES_DB=verivox -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d --rm postgres:13.0",
+    "close:db": "docker kill my-postgres",
+    "start:production": "echo '👉 Make sure you \"npm run start:db\" before this' && npm run build && NODE_ENV=production node .",
+    "build": "babel --delete-dir-on-start --out-dir dist --copy-files --ignore \"**/__tests__/**,**/__mocks__/**\" --no-copy-ignored src",
+    "test": "jest"
+  },
+  "author": "Carlos Torres",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "loglevel": "^1.7.1",
+    "pg": "^8.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/register": "^7.15.3",
+    "nodemon": "^2.0.14",
+    "jest": "^27.3.1"
+  }
+}
